@@ -33,6 +33,7 @@ let velocityX = -2; //pipes move left speed
 let velocityY = 0; //burd jump speed
 let gravity = 0.4;
 let score = 0;
+let start = "PRESS TO PLAY";
 
 let gameOver = false;
 
@@ -62,7 +63,7 @@ window.onload = function () {
   requestAnimationFrame(update);
   setInterval(placePipes, 1500); //every 1.5 seconds
   document.addEventListener("keydown", moveBird);
-  document.addEventListener("touchend", moveBird);
+  document.addEventListener("touchstart", moveBird);
 };
 
 function update() {
@@ -109,7 +110,7 @@ function update() {
   context.fillText(score, 10, 45);
 
   if (gameOver) {
-    context.fillText("GAME OVER", 38, 320);
+    context.fillText("GAME OVER", 40, 320);
   }
 }
 
@@ -147,7 +148,7 @@ function placePipes() {
 }
 
 function moveBird(e) {
-  if (e.code == "Space" || e.code == "ArrowUp" || e.code == "KeyX") {
+  if (e.code == "Space" || e.code == "ArrowUp" || e.code == "KeyX" || e.touches) {
     //jump
     velocityY = -6;
 
@@ -159,7 +160,6 @@ function moveBird(e) {
       gameOver = false;
     }
   }
-  velocityY = -6;
 }
 
 function detectCollision(a, b) {
